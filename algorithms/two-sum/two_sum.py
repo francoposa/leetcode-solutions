@@ -2,6 +2,8 @@ from typing import List
 
 
 class Solution:
+    """https://leetcode.com/problems/two-sum/"""
+
     def twoSumNaive(self, nums: List[int], target: int) -> List[int]:
         for i, num1 in enumerate(nums):
             if num1 > target:
