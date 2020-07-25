@@ -6,14 +6,15 @@ class Solution:
 
         len_nums1 = len(nums1)
         len_nums2 = len(nums2)
-        merged_len = len_nums1 + len_nums2 - 1
+        merged_max_index = len_nums1 + len_nums2 - 1
 
-        medianIndexLower = merged_len // 2
-        medianIndexUpper = medianIndexLower + (merged_len % 2)
+        # These two values will be equal for an even merged_max_index
+        median_index_lower = merged_max_index // 2
+        median_index_upper = median_index_lower + (merged_max_index % 2)
 
         merged_nums = []
         i, j, k = 0, 0, 0
-        while k <= medianIndexUpper:
+        while k <= median_index_upper:
             if i == len_nums1:
                 # We have reached the end of nums1
                 merged_nums.append(nums2[j])
@@ -31,4 +32,4 @@ class Solution:
 
             k += 1
 
-        return (merged_nums[medianIndexLower] + merged_nums[medianIndexUpper]) / 2
+        return (merged_nums[median_index_lower] + merged_nums[median_index_upper]) / 2
