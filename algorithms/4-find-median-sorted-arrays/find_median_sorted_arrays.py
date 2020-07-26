@@ -2,8 +2,9 @@ from typing import List
 
 
 class Solution:
-    def findMedianSortedArrays(self, nums1: List[int], nums2: List[int]) -> float:
+    """https://leetcode.com/problems/median-of-two-sorted-arrays/"""
 
+    def findMedianSortedArrays(self, nums1: List[int], nums2: List[int]) -> float:
         len_nums1 = len(nums1)
         len_nums2 = len(nums2)
         merged_max_index = len_nums1 + len_nums2 - 1

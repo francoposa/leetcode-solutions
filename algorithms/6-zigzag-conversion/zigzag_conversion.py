@@ -2,6 +2,8 @@ from collections import defaultdict
 
 
 class Solution:
+    """https://leetcode.com/problems/zigzag-conversion/"""
+
     def convert(self, s: str, numRows: int) -> str:
         if numRows == 1:
             return s
