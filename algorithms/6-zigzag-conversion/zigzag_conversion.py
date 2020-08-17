@@ -27,4 +27,3 @@ class Solution:
             result += "".join(row_num_chars[i])
 
         return result
-
