@@ -10,7 +10,7 @@ class Solution:
                 if nums[i] + nums[j] == target:
                     return [i, j]
 
-    def twoSum(self, nums: List[int], target: int) -> List[int]:
+    def twoSumImproved(self, nums: List[int], target: int) -> List[int]:
         # building it ourselves appears to be faster than using defaultdict,
         # although I have not checked if that slowdown comes from the import
         nums_item_indices: Dict[int, List[int]] = {}
@@ -37,3 +37,18 @@ class Solution:
                         return num_target_difference_indices
                     continue
                 return [nums_item_indices[num][0], num_target_difference_indices[0]]
+
+    def twoSum(self, nums: List[int], target: int) -> List[int]:
+        num_index_map: Dict[int, int] = {}
+        num_target_difference_index_map: Dict[int, int] = {}
+        for i, num in enumerate(nums):
+            num_target_difference = target - num
+            if num_target_difference in num_index_map:
+                # the target difference is equal to a previous num in the array
+                return [num_index_map[num_target_difference], i]
+            elif num in num_target_difference_index_map:
+                # num is equal to the target difference of a previous num in the array
+                return [num_target_difference_index_map[num], i]
+            else:
+                num_index_map[num] = i
+                num_target_difference_index_map[num_target_difference] = i
