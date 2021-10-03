@@ -4,6 +4,7 @@ func main() {
 	twoSum([]int{2, 7, 11, 15}, 9)
 }
 
+// https://leetcode.com/problems/two-sum/
 func twoSum(nums []int, target int) []int {
 	targetDifferenceIndices := map[int]int{}
 
