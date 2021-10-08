@@ -59,7 +59,11 @@ func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
 		return l2
 	}
 	sum := l1.Val + l2.Val
-	next := addTwoNumbers(l1.Next, l2.Next) // Let the rest of the recursion run
+
+	// Let the rest of the recursion run, which returns the rest of the number chain,
+	// not including any carrying we may need to do for two digits with sum >= 10
+	next := addTwoNumbers(l1.Next, l2.Next)
+
 	if sum >= 10 {
 		// sum can't be more than 18 (from adding two nines),
 		// so we only need to modulo once to get back to a single digit

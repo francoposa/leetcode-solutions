@@ -1,3 +1,6 @@
+from typing import Optional
+
+
 class ListNode:
     """Definition for singly-linked list"""
 
@@ -9,34 +12,30 @@ class ListNode:
 class Solution:
     """https://leetcode.com/problems/add-two-numbers/"""
 
-    def addTwoNumbers(self, l1: ListNode, l2: ListNode) -> ListNode:
-        num1 = self._intFromListNode(l1)
-        num2 = self._intFromListNode(l2)
+    def addTwoNumbers(
+        self, l1: Optional[ListNode], l2: Optional[ListNode]
+    ) -> Optional[ListNode]:
+        if l1 and not l2:
+            return l1
+        elif not l1 and l2:
+            return l2
+        elif not l1 and not l2:
+            return None
 
-        return self._listNodeFromInt(num1 + num2)
-
-    def _intFromListNode(self, l: ListNode) -> int:
-        factor = 1
-        base = 10
-        num = 0
-        while l is not None:
-            num += l.val * factor
-            l = l.next
-            factor *= base
-
-        return num
-
-    def _listNodeFromInt(self, n: int) -> ListNode:
-        base = 10
-        node = ListNode()
-        first_node = node
-        while n > 0:
-            node.val = n % base
-            n = n // base
-
-            if n > 0:
-                next_node = ListNode()
-                node.next = next_node
-                node = next_node
-
-        return first_node
+        sum: int = l1.val + l2.val
+        # Let the rest of the recursion run, which returns the rest of the number chain,
+        # not including any carrying we may need to do for two digits with sum >= 10
+        next: Optional[ListNode] = self.addTwoNumbers(l1.next, l2.next)
+        if sum >= 10:
+            # sum can't be more than 18 (from adding two nines),
+            # so we only need to modulo once to get back to a single digit
+            sum %= 10
+            # The next digit (which is one tens place higher) needs to be increased by 1
+            # from whatever came back from the rest of the recursion.
+            # If the next digit came back >= 10 (only possible case is next.Val = 9),
+            # then the recursive call will hit this code path again and correct it.
+            next: Optional[ListNode] = self.addTwoNumbers(
+                next,
+                ListNode(val=1, next=None),
+            )
+        return ListNode(val=sum, next=next)
