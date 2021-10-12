@@ -18,8 +18,8 @@ class Solution:
 
             if j < len_full_string:
                 next_char = s[j]
-                next_char_index_in_current_candidate_substring = current_candidate_substring.find(
-                    next_char
+                next_char_index_in_current_candidate_substring = (
+                    current_candidate_substring.find(next_char)
                 )
                 if next_char_index_in_current_candidate_substring >= 0:
                     # current_candidate_substring starting at i cannot
