@@ -8,22 +8,22 @@ class Solution:
         if numRows == 1:
             return s
 
-        row_num_chars = defaultdict(list)
+        row_content = {row_num: "" for row_num in range(numRows)}
         row_num, step = 0, 1
 
         for char in s:
-            row_num_chars[row_num].append(char)
+            row_content[row_num] += char
             if row_num == numRows - 1 and step == 1:
                 # Reached the bottom row, go back up
                 step = -1
             elif row_num == 0 and step == -1:
-                # Returned to top rowm head back down
+                # Returned to top row, head back down
                 step = 1
 
             row_num += step
 
-        result = ""
-        for i in range(numRows):
-            result += "".join(row_num_chars[i])
+        converted_s = ""
+        for content in row_content.values():
+            converted_s += content
 
-        return result
+        return converted_s
