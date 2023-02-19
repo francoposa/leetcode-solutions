@@ -6,16 +6,16 @@ func main() {
 
 // https://leetcode.com/problems/two-sum/
 func twoSum(nums []int, target int) []int {
-	targetDifferenceIndices := map[int]int{}
-
-	for i, num := range nums {
-		targetDifference := target - num
-		if targetDifferenceIndex, ok := targetDifferenceIndices[num]; ok {
-			// num is equal to the target difference of a previous num in the slice
-			return []int{targetDifferenceIndex, i}
-		} else {
-			targetDifferenceIndices[targetDifference] = i
-		}
-	}
-	return []int{}
+    targetDiffIndices := map[int]int{}
+    for i, num := range nums {
+        // check for existing target diff for this num
+        diff := target - num
+        if diffIndex, ok := targetDiffIndices[diff]; ok {
+            // a previous num is the diff between num and target
+            return []int{i, diffIndex}
+        } else {
+            targetDiffIndices[num] = i
+        }
+    }
+    return []int{}
 }
