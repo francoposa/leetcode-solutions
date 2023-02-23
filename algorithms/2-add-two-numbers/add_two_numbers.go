@@ -43,36 +43,36 @@ type ListNode struct {
 
 // https://leetcode.com/problems/add-two-numbers/
 func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
-	if l1 == nil && l2 == nil {
-		// exhausted both lists at the same time
-		// recursion has bottomed out, return back up the chain
-		return nil
-	}
-	if l1 != nil && l2 == nil {
-		// exhausted l2, the rest of the sum is just equal to the rest of l1
-		// no need to recur further, return back up the chain
-		return l1
-	}
-	if l1 == nil && l2 != nil {
-		// exhausted l1, the rest of the sum is just equal to the rest of l2
-		// no need to recur further, return back up the chain
-		return l2
-	}
-	sum := l1.Val + l2.Val
+	current := &ListNode{}
+	head := current
+	carry := 0
+	for {
+		sum := carry
 
-	// Let the rest of the recursion run, which returns the rest of the number chain,
-	// not including any carrying we may need to do for two digits with sum >= 10
-	next := addTwoNumbers(l1.Next, l2.Next)
+		if l1 != nil {
+			sum += l1.Val
+			l1 = l1.Next
+		}
+		if l2 != nil {
+			sum += l2.Val
+			l2 = l2.Next
+		}
 
-	if sum >= 10 {
-		// sum can't be more than 18 (from adding two nines),
-		// so we only need to modulo once to get back to a single digit
-		sum %= 10
-		// The next digit (which is one tens place higher) needs to be increased by 1
-		// from whatever came back from the rest of the recursion.
-		// If the next digit came back >= 10 (only possible case is next.Val = 9),
-		// then the recursive call will hit this code path again and correct it.
-		next = addTwoNumbers(next, &ListNode{Val: 1, Next: nil})
+		if sum >= 10 {
+			carry = sum / 10
+			sum %= 10
+		} else {
+			carry = 0
+		}
+
+		current.Val = sum
+		if l1 != nil || l2 != nil || carry != 0 {
+			current.Next = &ListNode{}
+			current = current.Next
+		} else {
+			break
+		}
 	}
-	return &ListNode{Val: sum, Next: next}
+
+	return head
 }
