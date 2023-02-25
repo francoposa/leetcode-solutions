@@ -42,7 +42,7 @@ type ListNode struct {
 }
 
 // https://leetcode.com/problems/add-two-numbers/
-func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
+func addTwoNumbersIter(l1 *ListNode, l2 *ListNode) *ListNode {
 	current := &ListNode{}
 	head := current
 	carry := 0
@@ -75,4 +75,42 @@ func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
 	}
 
 	return head
+}
+
+func addTwoNumbersRecur(l1 *ListNode, l2 *ListNode) *ListNode {
+	if l1 == nil && l2 == nil {
+		// recursion has bottomed out, return back up the chain
+		return nil
+	}
+
+	sum := 0
+	if l1 != nil {
+		sum += l1.Val
+	}
+	if l2 != nil {
+		sum += l2.Val
+	}
+
+	if sum >= 10 {
+		carry := sum / 10
+		sum %= 10
+		if l1.Next != nil {
+			l1.Next.Val += carry
+		} else {
+			l1.Next = &ListNode{Val: carry, Next: nil}
+		}
+	}
+
+	// prevent calling .Next on nil node
+	var l1Next, l2Next *ListNode
+	if l1 != nil {
+		l1Next = l1.Next
+	}
+	if l2 != nil {
+		l2Next = l2.Next
+	}
+
+	next := addTwoNumbers(l1Next, l2Next)
+
+	return &ListNode{Val: sum, Next: next}
 }
