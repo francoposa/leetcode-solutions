@@ -13,6 +13,17 @@ var tests = []struct {
 }{
 	{
 		l1: &ListNode{
+			Val: 0,
+		},
+		l2: &ListNode{
+			Val: 0,
+		},
+		sum: &ListNode{
+			Val: 0,
+		},
+	},
+	{
+		l1: &ListNode{
 			Val: 2,
 			Next: &ListNode{
 				Val: 4,
@@ -42,6 +53,68 @@ var tests = []struct {
 				},
 			},
 		}, // list repr of 807
+	},
+	{
+		l1: &ListNode{
+			Val: 9,
+			Next: &ListNode{
+				Val: 9,
+				Next: &ListNode{
+					Val: 9,
+					Next: &ListNode{
+						Val: 9,
+						Next: &ListNode{
+							Val: 9,
+							Next: &ListNode{
+								Val: 9,
+								Next: &ListNode{
+									Val:  9,
+									Next: nil,
+								},
+							},
+						},
+					},
+				},
+			},
+		}, // list repr of 9,999,999
+		l2: &ListNode{
+			Val: 9,
+			Next: &ListNode{
+				Val: 9,
+				Next: &ListNode{
+					Val: 9,
+					Next: &ListNode{
+						Val:  9,
+						Next: nil,
+					},
+				},
+			},
+		}, // list repr of 9,999
+		sum: &ListNode{
+			Val: 8,
+			Next: &ListNode{
+				Val: 9,
+				Next: &ListNode{
+					Val: 9,
+					Next: &ListNode{
+						Val: 9,
+						Next: &ListNode{
+							Val: 0,
+							Next: &ListNode{
+								Val: 0,
+								Next: &ListNode{
+									Val: 0,
+									Next: &ListNode{
+										Val:  1,
+										Next: nil,
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		}, // list repr of 10,009,998
 	},
 }
 
