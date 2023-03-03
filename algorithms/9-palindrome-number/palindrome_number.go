@@ -1,6 +1,6 @@
 package algorithmanalysis
 
-// https://leetcode.com/problems/palindrome-number/
+// https://leetcode.com/problems/palindrome-number
 func isPalindrome(x int) bool {
 	if x < 0 {
 		// minor optimization; problem definition implies that a negative x can never

@@ -5,7 +5,7 @@ type ListNode struct {
 	Next *ListNode
 }
 
-// https://leetcode.com/problems/add-two-numbers/
+// https://leetcode.com/problems/add-two-numbers
 func addTwoNumbersIter(l1 *ListNode, l2 *ListNode) *ListNode {
 	current := &ListNode{}
 	head := current

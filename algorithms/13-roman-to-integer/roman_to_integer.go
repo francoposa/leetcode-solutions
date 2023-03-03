@@ -10,7 +10,7 @@ var symbolVals = map[rune]int{
 	'M': 1000,
 }
 
-// https://leetcode.com/problems/roman-to-integer/description/
+// https://leetcode.com/problems/roman-to-integer
 func romanToInt(s string) int {
 	sum := 0
 	previousVal := 0
