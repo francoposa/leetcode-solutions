@@ -1,8 +1,9 @@
 package merge_two_sorted_lists
 
 import (
-	"github.com/stretchr/testify/assert"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
 var tests = []struct {
