@@ -6,28 +6,34 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func Test(t *testing.T) {
-	var input string
-	var expected string
-	var actual string
+var tests = []struct {
+	input    string
+	expected string
+}{
+	{
+		input:    "babad",
+		expected: "bab",
+	},
+	{
+		input:    "cbbd",
+		expected: "bb",
+	},
+	{
+		input:    "abb",
+		expected: "bb",
+	},
+	{
+		input:    "a",
+		expected: "a",
+	},
+	{
+		input:    "ac",
+		expected: "a",
+	},
+}
 
-	input = "babad"
-	expected = "bab"
-	actual = longestPalindrome(input)
-	assert.Equal(t, expected, actual)
-
-	input = "cbbd"
-	expected = "bb"
-	actual = longestPalindrome(input)
-	assert.Equal(t, expected, actual)
-
-	input = "a"
-	expected = "a"
-	actual = longestPalindrome(input)
-	assert.Equal(t, expected, actual)
-
-	input = "ac"
-	expected = "a"
-	actual = longestPalindrome(input)
-	assert.Equal(t, expected, actual)
+func TestLongestPalindromeSlow(t *testing.T) {
+	for _, test := range tests {
+		assert.Equal(t, test.expected, longestPalindromeSlow(test.input))
+	}
 }
